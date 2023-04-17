@@ -31,6 +31,7 @@ func main (){
 
 	classic_array([]int{8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89, 9000,})
 	small_number([]int{0, 8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89, 9000,})
+	largest_number([]int{0, 8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89,})
 	os.Exit(200)
 }
 
@@ -153,4 +154,14 @@ func small_number(inputArray []int){
 		}
 	}
 	fmt.Println("The smallest value is: ",small_val)
+}
+
+func largest_number(inputArray []int){
+	large_val := inputArray[0]
+	for i := 0; i < len(inputArray); i++ {
+		if inputArray[i]>large_val {
+			large_val = inputArray[i]
+		}
+	}
+	fmt.Println("The lasrgest value is: ", large_val)
 }
