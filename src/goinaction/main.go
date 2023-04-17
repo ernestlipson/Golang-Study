@@ -47,14 +47,19 @@ func convert_temp() (float64, error) {
 	return (temp -32) * 5/9, nil
 }
 
-func print_num(val int) (int, error){
-	var count int
+func print_num(val int) (int,int, error){
+	var evenCount int
+	var oddCount int
 	if (val < 0) {
-		return 0, fmt.Errorf("Invalid number. Value must be greater than 0")
+		return 0, 0, fmt.Errorf("Invalid number. Value must be greater than 0")
 	}
 	for i := 0; i <= val; i++ {
+		if i % 2 == 0 {
+			evenCount += i
+		} else {
+			oddCount += i
+		}
 		fmt.Println(i)
-		count += i
 	}
-	return count, nil
+	return evenCount, oddCount, nil
 }
