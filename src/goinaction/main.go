@@ -23,6 +23,8 @@ func main (){
 	doubleNum()
 	fmt.Println(convert_temp())
 	fmt.Println(print_num(100))
+	fizz_buzz(90)
+	fizz_buzz_s(99)
 	os.Exit(200)
 }
 
@@ -62,4 +64,35 @@ func print_num(val int) (int,int, error){
 		fmt.Println(i)
 	}
 	return evenCount, oddCount, nil
+}
+
+func fizz_buzz(val int) {
+	for i := 0; i < val; i++ {
+		if i == 0 {continue}
+		if i % 3 == 0 && i % 5 == 0 {
+			fmt.Println("FizzBuzz")
+		} else if i % 5 == 0 {
+			fmt.Println("Buzz")
+		} else if i % 3 == 0 {
+			fmt.Println("Fizz")
+		} else {
+			fmt.Println(i)
+		}
+	}
+
+}
+
+func fizz_buzz_s (val int){
+	for i := 1; i <= val; i++ {
+        switch {
+        case i%3 == 0 && i%5 == 0:
+            fmt.Println("FizzBuzz")
+        case i%3 == 0:
+            fmt.Println("Fizz")
+        case i%5 == 0:
+            fmt.Println("Buzz")
+        default:
+            fmt.Println(i)
+        }
+    }
 }
