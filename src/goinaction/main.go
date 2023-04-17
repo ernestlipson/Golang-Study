@@ -21,8 +21,8 @@ func main (){
 	fmt.Println(message[3])
 	fmt.Println("Numeric types:", 2+9)
 	doubleNum()
-	finalTemp, error := convert_temp()
-	fmt.Println("Entered Temperature: ",finalTemp, error)
+	fmt.Println(convert_temp())
+	fmt.Println(print_num(100))
 	os.Exit(200)
 }
 
@@ -35,7 +35,7 @@ func doubleNum()  {
 }
 
 func convert_temp() (float64, error) {
-	fmt.Print("Enter a number: ")
+	fmt.Print("Enter a Temperature: ")
 	var temp float64
 	fmt.Scanf("%f", &temp)
 	if temp < -459.67 {
@@ -45,4 +45,16 @@ func convert_temp() (float64, error) {
 		return temp * 9/5 + 32, nil
 	}
 	return (temp -32) * 5/9, nil
+}
+
+func print_num(val int) (int, error){
+	var count int
+	if (val < 0) {
+		return 0, fmt.Errorf("Invalid number. Value must be greater than 0")
+	}
+	for i := 0; i <= val; i++ {
+		fmt.Println(i)
+		count += i
+	}
+	return count, nil
 }
