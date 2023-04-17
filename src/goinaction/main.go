@@ -25,8 +25,12 @@ func main (){
 	fmt.Println(print_num(100))
 	fizz_buzz(90)
 	fizz_buzz_s(99)
-	
-	classic_array([]int{8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89})
+
+	make_slice()
+	go_map()
+
+	classic_array([]int{8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89, 9000,})
+	small_number([]int{0, 8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89, 9000,})
 	os.Exit(200)
 }
 
@@ -101,8 +105,52 @@ func fizz_buzz_s (val int){
 
 func classic_array(inputArray []int)  {
 	var totalUser int = 0
-	for i := 0; i < len(inputArray); i++ {
-		totalUser += inputArray[i]
+	for _, value := range inputArray {
+		totalUser += value
 	}
 	fmt.Println("Total Array elements: ", totalUser)
+	fmt.Println("Mean/Average: ", totalUser/len(inputArray))
+}
+
+func make_slice(){
+	slice := append(make([]int, 19), 99, 88, 12, 78)
+	fmt.Println(slice)
+}
+
+func copy_func() {
+	slice := []int{9, 56, 88, 78, 33}
+	slice_two := []int{9, 56, 88, 78, 33}
+	copy(slice, slice_two)
+}
+
+func go_map() {
+	new_map := make(map[int]string)
+	new_map[8] = "Seventy Eight"
+	fmt.Println(new_map)
+
+		elements := map[string]string{
+	"H": "Hydrogen",
+	"He": "Helium",
+	"Li": "Lithium",
+	"Be": "Beryllium",
+	"B": "Boron",
+	"C": "Carbon",
+	"N": "Nitrogen",
+	"O": "Oxygen",
+	"F": "Fluorine",
+	"Ne": "Neon"}
+
+	if chemical, ok := elements["Uriah"]; ok {
+		fmt.Println(ok, chemical)
+	}
+}
+
+func small_number(inputArray []int){
+	small_val := inputArray[0]
+	for _, value := range inputArray {
+		if (value < small_val) {
+			small_val = value
+		}
+	}
+	fmt.Println("The smallest value is: ",small_val)
 }
