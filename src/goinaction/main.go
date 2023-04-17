@@ -20,8 +20,10 @@ func main (){
 	fmt.Println("Length of String,", name_length)
 	fmt.Println(message[3])
 	fmt.Println("Numeric types:", 2+9)
-	os.Exit(200)
 	doubleNum()
+	finalTemp, error := convert_temp(67)
+	fmt.Println("Entered Temperature: ",finalTemp, error)
+	os.Exit(200)
 }
 
 func doubleNum()  {
