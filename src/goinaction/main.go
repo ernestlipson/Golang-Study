@@ -25,6 +25,8 @@ func main (){
 	fmt.Println(print_num(100))
 	fizz_buzz(90)
 	fizz_buzz_s(99)
+	newArray := [...]int{8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89}
+	classic_array([12]int(newArray))
 	os.Exit(200)
 }
 
@@ -95,4 +97,15 @@ func fizz_buzz_s (val int){
             fmt.Println(i)
         }
     }
+}
+
+func classic_array(inputArray [12]int)  {
+	var totalUser int = 0
+	for i := 0; i < 12; i++ {
+		if len(inputArray) > 12 {
+			fmt.Println("Array List must be less than 12")
+		}
+		totalUser += inputArray[i]
+	}
+	fmt.Println("Total Array elements: ", totalUser)
 }
