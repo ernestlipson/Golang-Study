@@ -31,3 +31,13 @@ func doubleNum()  {
 	output := input * 2 * math.Pi
 	fmt.Println(output)
 }
+
+func convert_temp(temp float64) (float64, error)  {
+	if temp < -459.67 {
+		return 0, fmt.Errorf("Invalid Temperature: %v", temp)
+	}
+	if temp >= -273.15 && temp <= 100 {
+		return temp * 9/5 + 32, nil
+	}
+	return (temp -32) * 5/9, nil
+}
