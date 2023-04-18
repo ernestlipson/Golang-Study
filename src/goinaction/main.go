@@ -30,8 +30,13 @@ func main (){
 	go_map()
 
 	classic_array([]int{8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89, 9000,})
-	small_number([]int{0, 8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89, 9000,})
-	largest_number([]int{0, 8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89,})
+	fmt.Println(small_number([]int{0, 8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89, 9000,}))
+	fmt.Println(largest_number([]int{0, 8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89,})) 
+
+	xarray := []float64{8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89, 9000,}
+	fmt.Println(arraySmLg(xarray))
+	small, large := arraySmLg(xarray)
+	fmt.Println("The small and large Numbers: ",small, large)
 	os.Exit(200)
 }
 
@@ -146,22 +151,35 @@ func go_map() {
 	}
 }
 
-func small_number(inputArray []int){
+func small_number(inputArray []int) int{
 	small_val := inputArray[0]
 	for _, value := range inputArray {
 		if (value < small_val) {
 			small_val = value
 		}
 	}
-	fmt.Println("The smallest value is: ",small_val)
+	return small_val
 }
 
-func largest_number(inputArray []int){
+func largest_number(inputArray []int) int{
 	large_val := inputArray[0]
 	for i := 0; i < len(inputArray); i++ {
 		if inputArray[i]>large_val {
 			large_val = inputArray[i]
 		}
 	}
-	fmt.Println("The lasrgest value is: ", large_val)
+	return large_val
+}
+
+func arraySmLg(xs []float64) (float64, float64) {
+	sm_number := xs[0]
+	lg_number := xs[len(xs)-1]
+	for _, v := range xs {
+		if v < sm_number {
+			sm_number = v
+		} else if v > lg_number {
+			lg_number = v
+		}
+	}
+	return sm_number, lg_number
 }
