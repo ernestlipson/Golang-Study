@@ -52,8 +52,11 @@ func main() {
 	fmt.Println(nextEven())
 
 	fmt.Println("The factorial is:", facotrial(2))
-
 	fmt.Println("The factorial is:", facotrial(67))
+
+	xPtr := new(int)
+	givenNumber(xPtr)
+	fmt.Println(*xPtr)
 
 }
 
@@ -244,4 +247,8 @@ func facotrial(fact uint) uint {
 		return 1
 	}
 	return fact * facotrial(fact-1)
+}
+
+func givenNumber(xPtr *int) {
+	*xPtr = 4
 }
