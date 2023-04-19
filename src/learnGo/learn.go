@@ -77,3 +77,15 @@ func hasNegative(args ...int) (bool, []int) {
 	}
 	return false, nil
 }
+
+type CircleDef struct {
+	x float64
+	y float64
+	z float64
+}
+
+func person_def(diameter float64, circumference float64, radius float64) CircleDef {
+	person_def := CircleDef{x: diameter, y: circumference, z: radius}
+	fmt.Println(person_def.x)
+	return person_def
+}
