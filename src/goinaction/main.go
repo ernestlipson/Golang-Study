@@ -5,6 +5,7 @@ import (
 	"io"
 	"math"
 	"os"
+	"strings"
 )
 
 var name string = "Ernest Darko"
@@ -57,7 +58,7 @@ func main() {
 	xPtr := new(int)
 	givenNumber(xPtr)
 	fmt.Println(*xPtr)
-
+	fmt.Println(strings.Contains("ert", "ernest"))
 }
 
 func doubleNum() {
@@ -252,3 +253,15 @@ func facotrial(fact uint) uint {
 func givenNumber(xPtr *int) {
 	*xPtr = 4
 }
+
+type Shape interface {
+	area() float64
+}
+
+type GivenPlayers struct {
+	player_name, city, state string
+	age int
+}
+
+var explicit int
+
