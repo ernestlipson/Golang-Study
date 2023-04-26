@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// TODO: define the 'OvenTime' constant
+// define the 'OvenTime' constant
 const OvenTime = 40
 
 // RemainingOvenTime returns the remaining minutes based on the `actual` minutes already in the oven.
@@ -81,7 +81,91 @@ func CleanupMessage(oldMsg string) string {
 	return output
 }
 
+func NeedsLicense(kind string) bool {
+	if kind == "car" || kind == "truck" {
+		return true
+	}
+	return false
+}
+
+func HappyBirthday(name string, age int) string {
+	message := fmt.Sprintf("Happy birthday %s! You are now %d years old!", name, age)
+	return message
+}
+
+func AssignTable(name string, table int,
+	neighbor, direction string, distance float64) string {
+	message := fmt.Sprintf("Welcome to my party %s\nYou have been assigned to table %03d. Your table is %s, exactly %.2f meters from here.\nYou will be sitting next to %s", name, table, direction, distance, neighbor)
+	return message
+}
+
+func ChooseVehicle(option1, option2 string) string {
+	if option1 < option2 {
+		return option1 + " is clearly the better choice."
+	} else {
+		return option2 + " is clearly the better choice"
+	}
+}
+
+func CalculateResellPrice(originalPrice, age float64) float64 {
+	if age < 3 {
+		return 0.8 * originalPrice
+	} else if age >= 10 {
+		return 0.5 * originalPrice
+	} else {
+		return 0.7 * originalPrice
+	}
+}
+
+func findNumAtIndex(num int, nums ...int) {
+	for i, v := range nums {
+		if v == num {
+			fmt.Println(num, "found at index", i, "in", nums)
+			return
+		}
+	}
+	fmt.Println(num, "not found in ", nums)
+}
+
+func FavoriteCards() []int {
+	magiCards := []int{2, 6, 9}
+	return magiCards
+}
+
+func GetItem(slice []int, index int) int {
+	if index >= len(slice) || index < 0 {
+		return -1
+	}
+	value := slice[index]
+	return value
+}
+
+func SetItem(slice []int, index, value int) []int {
+	if index >= len(slice) || index < 0 {
+		return append(slice, value)
+	}
+	slice[index] = value
+	return slice
+}
+
+func PrependItems(slice []int, values ...int) []int {
+	if len(values) == 0 {
+		return slice
+	}
+	values = append(values, slice...)
+	return values
+}
+
+func RemoveItem(slice []int, index int) []int {
+	if index < 0 || index >= len(slice) {
+		return slice
+	}
+	slice = append(slice[:index], slice[index+1:]...)
+	return slice
+}
+
 func main() {
+
 	fmt.Println(RemainingOvenTime(12))
 	fmt.Println(PreparationTime(8))
 	fmt.Println(ElapsedTime(8, 12))
@@ -99,9 +183,21 @@ func main() {
 	strings.ToLower("ANY AnabEL")
 	fmt.Println(AddBorder("Akwaaba", 12))
 	message := `
-**************************
-*    BUY NOW, SAVE 10%   *
-**************************
-`
+		**************************
+		*    BUY NOW, SAVE 10%   *
+		**************************
+		`
 	fmt.Println(CleanupMessage(message))
+	fmt.Println(NeedsLicense("car"))
+	fmt.Println(HappyBirthday("Ernest", 34))
+	fmt.Println(AssignTable("Christiane", 27, "Frank", "on the left", 23.7834298))
+
+	fmt.Println(ChooseVehicle("Amanda Hongguang", "Amanda Corolla"))
+	fmt.Println(CalculateResellPrice(1000, 1))
+	slice := []int{56, 67, 45, 90, 109}
+	findNumAtIndex(45, slice...)
+	fmt.Println(GetItem([]int{5, 2, 10, 6, 8, 7, 0, 9}, 8))
+	fmt.Println(SetItem([]int{1, 2, 4, 1}, -1, 6))
+	fmt.Println(PrependItems([]int{3, 2, 6, 4, 8}))
+	fmt.Println(RemoveItem([]int{3, 2, 6, 4, 8}, 2))
 }
