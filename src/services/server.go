@@ -164,7 +164,64 @@ func RemoveItem(slice []int, index int) []int {
 	return slice
 }
 
+// Structs
+type Car struct {
+	battery      int
+	batteryDrain int
+	speed        int
+	distance     int
+}
+
+type Track struct {
+	distance int
+}
+
+type Employee struct {
+	firstName      string
+	lastName       string
+	salary         int
+	jobDuration    bool
+	yearsOfService string
+}
+
+func NewTrack(trackDistance int) Track {
+	return Track{distance: trackDistance}
+}
+
+func NewCar(carSpeed int, batteryPerctge int) Car {
+	return Car{
+		speed:        carSpeed,
+		batteryDrain: batteryPerctge,
+	}
+}
+
+func NewEmployee(initName, midName string, salary int) Employee {
+	return Employee{
+		firstName:      initName,
+		lastName:       midName,
+		salary:         salary,
+		jobDuration:    true,
+		yearsOfService: "2024-09-18",
+	}
+}
+
+func Drive(car Car) Car {
+	return Car{
+		speed:        5,
+		batteryDrain: 2,
+		battery:      98,
+	}
+}
+
 func main() {
+
+	car := NewCar(5, 2)
+	track := NewTrack(12)
+
+	fmt.Println(NewEmployee("Ernest", "Darko", 45600))
+	fmt.Println(car)
+	fmt.Println(track)
+	fmt.Println(NewTrack(34))
 
 	fmt.Println(RemainingOvenTime(12))
 	fmt.Println(PreparationTime(8))
