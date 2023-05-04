@@ -221,8 +221,6 @@ func Drive(car Car) Car {
 }
 
 // CanFinish checks if a car is able to finish a certain track.
-// func CanFinish(car Car, track Track) bool {
-// }
 
 func RollADie() int {
 	return rand.Intn(20) + 1
@@ -252,7 +250,6 @@ func BirdsInWeek(birdsPerDay []int, week int) int {
 	startIndex := (week - 1) * 7
 	endIndex := startIndex + 7
 	return TotalBirdCount(birdsPerDay[startIndex:endIndex])
-
 }
 
 func FixBirdCount(birdsPerDay []int) []int {
@@ -261,6 +258,54 @@ func FixBirdCount(birdsPerDay []int) []int {
 	}
 	return birdsPerDay
 }
+
+// Named Return Values
+func ProductSumMinus (min, max int) (sum, product int) {
+	sum, product = min + max, min * max
+	return
+}
+
+func PreparationTimes (layers []string, time int) int{
+	if time == 0 {
+		time = 2
+	}
+	return len(layers) * time
+}
+
+func Quantities (layers []string) (noodles int, sauce float64) {
+	for _, layer := range layers {
+        if layer == "noodles" {
+            noodles = noodles + 50
+        } else if layer == "sauce" {
+            sauce = sauce + 0.2
+        }
+    }
+    return
+}
+
+func AddSecretIngredients(myList, friendList []string) []string{
+	updatedSlice := friendList[len(friendList) - 1]
+	myList[len(myList)-1] = updatedSlice
+	return myList
+}
+
+func AddSecretIngredient(friendList []string, myList []string) {
+	(myList)[len(myList)-1] = friendList[len(friendList)-1]
+}
+
+func ScaleRecipe(quantities []float64, portion int) []float64 {
+    newList := make([]float64, len(quantities))
+    
+    portionVal := float64(portion)/2.0
+    for index,val := range quantities {
+        newList[index] = val * portionVal
+    }
+	return newList
+}
+
+// func ScaleRecipe (sliceAmount float64, numOfPortions int){
+// 	specialIngredients := 
+// }
 
 func main() {
 	birdsPerDay := []int{2, 5, 0, 7, 4, 1, 3, 0, 2, 5, 0, 1, 3, 1}
