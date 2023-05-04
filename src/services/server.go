@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"strings"
 )
 
@@ -192,6 +193,7 @@ func NewCar(carSpeed int, batteryPerctge int) Car {
 	return Car{
 		speed:        carSpeed,
 		batteryDrain: batteryPerctge,
+		battery:      100,
 	}
 }
 
@@ -206,22 +208,74 @@ func NewEmployee(initName, midName string, salary int) Employee {
 }
 
 func Drive(car Car) Car {
+	distance := car.speed
+	if car.batteryDrain == 0 {
+		return NewCar(0, 0)
+	}
 	return Car{
-		speed:        5,
-		batteryDrain: 2,
-		battery:      98,
+		speed:        car.speed,
+		batteryDrain: car.batteryDrain,
+		battery:      100 - car.batteryDrain,
+		distance:     distance,
 	}
 }
 
+// CanFinish checks if a car is able to finish a certain track.
+// func CanFinish(car Car, track Track) bool {
+// }
+
+func RollADie() int {
+	return rand.Intn(20) + 1
+}
+
+func GenerateWandEnergy() float64 {
+	return rand.Float64() + 12
+}
+
+func ShuffleAnimals() []string {
+	animals := []string{"ant", "beaver", "cat", "dog", "elephant", "fox", "giraffe", "hedgehog"}
+	rand.Shuffle(len(animals), func(i, j int) {
+		animals[i], animals[j] = animals[j], animals[i]
+	})
+	return animals
+}
+
 func main() {
+	// Declaration of anonymous structs
+	installments := struct {
+		userName, referredName string
+		salary                 int
+		jobType                bool
+	}{
+		userName:     "Monica",
+		referredName: "Seyram",
+		salary:       1200008,
+		jobType:      true,
+	}
+
+	newEmployee := &Employee{
+		firstName:   "Ross",
+		lastName:    "Bing",
+		salary:      13000,
+		jobDuration: true,
+	}
 
 	car := NewCar(5, 2)
 	track := NewTrack(12)
+	xElement := []string{"a", "b", "c", "d", "e"}
+	rand.Shuffle(len(xElement), func(i, j int) {
+		xElement[i], xElement[j] = xElement[j], xElement[i]
+	})
 
+	fmt.Println(installments)
+	fmt.Println(newEmployee)
+	fmt.Println(newEmployee.firstName)
 	fmt.Println(NewEmployee("Ernest", "Darko", 45600))
 	fmt.Println(car)
 	fmt.Println(track)
 	fmt.Println(NewTrack(34))
+	fmt.Println("Roll A die with THIS:", RollADie())
+	fmt.Println("Wand Energy die with THIS:", GenerateWandEnergy())
 
 	fmt.Println(RemainingOvenTime(12))
 	fmt.Println(PreparationTime(8))
