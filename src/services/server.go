@@ -240,7 +240,32 @@ func ShuffleAnimals() []string {
 	return animals
 }
 
+func TotalBirdCount(birdCount []int) int{
+	var totalBirdCount int
+	for _, v := range birdCount {
+		totalBirdCount += v
+	}
+	return totalBirdCount
+}
+
+func BirdsInWeek(birdsPerDay []int, week int) int {
+	startIndex := (week - 1) * 7
+	endIndex := startIndex + 7
+	return TotalBirdCount(birdsPerDay[startIndex:endIndex])
+
+}
+
+func FixBirdCount(birdsPerDay []int) []int {
+	for i := 0; i < len(birdsPerDay); i += 2 {
+		birdsPerDay[i] = birdsPerDay[i] + 1
+	}
+	return birdsPerDay
+}
+
 func main() {
+	birdsPerDay := []int{2, 5, 0, 7, 4, 1, 3, 0, 2, 5, 0, 1, 3, 1}
+	fmt.Println(TotalBirdCount(birdsPerDay))
+	fmt.Println("Birds Per Specified Week is: ",BirdsInWeek(birdsPerDay, 2))
 	// Declaration of anonymous structs
 	installments := struct {
 		userName, referredName string
