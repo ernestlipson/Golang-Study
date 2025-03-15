@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func ParseCard(card string) int {
 	var cards = map[string]int{
 		"ace":   11,
@@ -43,13 +41,6 @@ func FirstTurn(card1, card2, dealerCard string) string {
 		response = "H"
 	}
 	return response
-}
-
-func main() {
-	fmt.Println(ParseCard("king"))
-	fmt.Println(FirstTurn("ace", "ace", "ace"))
-	fmt.Println(FirstTurn("ace", "king", "ace"))
-	fmt.Println(FirstTurn("five", "queen", "ace"))
 }
 
 func AFirstTurn(card1, card2, dealerCard string) string {

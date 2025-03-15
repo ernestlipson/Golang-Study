@@ -9,67 +9,68 @@ import (
 )
 
 var name string = "Ernest Darko"
-var age uint64 = 100876
 
 func main() {
 	fmt.Fprint(io.Discard)
-	defer os.Exit(200)
+	defer os.Exit(0)
 
 	message := fmt.Sprintf("Hello, My name is %s.", name)
-	name_length := len(name)
-	val_mult := 32132 * 42452
-	fmt.Println("Mult is,", val_mult)
-	fmt.Println("Length of String,", name_length)
+	fmt.Println("Mult is,", 32132*42452)
+	fmt.Println("Length of String,", len(name))
 	fmt.Println(message[3])
 	fmt.Println("Numeric types:", 2+9)
 	doubleNum()
 
-	fmt.Println(convert_temp())
-	fmt.Println(print_num(100))
-	fizz_buzz(90)
-	fizz_buzz_s(99)
+	temp, err := convertTemp()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(temp)
+	}
+	evenSum, oddSum, err := printNum(100)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("Even Sum:", evenSum, "Odd Sum:", oddSum)
+	}
+	fizzBuzz(90)
+	fizzBuzzSwitch(99)
 
-	make_slice()
-	go_map()
+	makeSlice()
+	goMap()
 
-	classic_array([]int{8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89, 9000})
-	fmt.Println(small_number([]int{0, 8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89, 9000}))
-	fmt.Println(largest_number([]int{0, 8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89}))
+	arr := []int{8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89, 9000}
+	fmt.Println("Smallest number:", findSmallest(arr))
+	fmt.Println("Largest number:", findLargest(arr))
 
 	xarray := []float64{8, 12, 89, 12, 9, 8, 9, 4, 4, 2, 67, 89, 9000}
-	fmt.Println(arraySmLg(xarray))
-	small, large := arraySmLg(xarray)
-	fmt.Println("The small and large Numbers: ", small, large)
+	small, large := findSmallestLargest(xarray)
+	fmt.Println("Smallest and largest numbers:", small, large)
 
 	xs := []int{4, 78, 99, 1000, 89, 99, 67, -100}
 	sum, mult := sumWithMinMaxProduct(xs...)
-	fmt.Println("Sum of XS is & multiply is ", sum, mult)
-	sum_A, mult_A := sumWithMinMaxProduct(2, 8, 19, 100000, 868, 996, -2)
-	fmt.Println("Sum of SOME STRANGE ARRAY ", sum_A, mult_A)
+	fmt.Println("Sum and product:", sum, mult)
 
 	nextEven := generateEvenNumber()
-	fmt.Println(nextEven())
-	fmt.Println(nextEven())
-	fmt.Println(nextEven())
+	fmt.Println(nextEven(), nextEven(), nextEven())
 
-	fmt.Println("The factorial is:", facotrial(2))
-	fmt.Println("The factorial is:", facotrial(67))
+	fmt.Println("Factorial of 2:", factorial(2))
+	fmt.Println("Factorial of 67:", factorial(67))
 
 	xPtr := new(int)
-	givenNumber(xPtr)
+	assignNumber(xPtr)
 	fmt.Println(*xPtr)
-	fmt.Println(strings.Contains("ert", "ernest"))
+	fmt.Println(strings.Contains("ernest", "ern"))
 }
 
 func doubleNum() {
 	fmt.Print("Enter a number: ")
 	var input float64
 	fmt.Scanf("%f", &input)
-	output := input * 2 * math.Pi
-	fmt.Println(output)
+	fmt.Println(input * 2 * math.Pi)
 }
 
-func convert_temp() (float64, error) {
+func convertTemp() (float64, error) {
 	fmt.Print("Enter a Temperature: ")
 	var temp float64
 	fmt.Scanf("%f", &temp)
@@ -82,42 +83,23 @@ func convert_temp() (float64, error) {
 	return (temp - 32) * 5 / 9, nil
 }
 
-func print_num(val int) (int, int, error) {
-	var evenCount int
-	var oddCount int
+func printNum(val int) (int, int, error) {
 	if val < 0 {
 		return 0, 0, fmt.Errorf("Invalid number. Value must be greater than 0")
 	}
+	var evenSum, oddSum int
 	for i := 0; i <= val; i++ {
 		if i%2 == 0 {
-			evenCount += i
+			evenSum += i
 		} else {
-			oddCount += i
+			oddSum += i
 		}
 		fmt.Println(i)
 	}
-	return evenCount, oddCount, nil
+	return evenSum, oddSum, nil
 }
 
-func fizz_buzz(val int) {
-	for i := 0; i < val; i++ {
-		if i == 0 {
-			continue
-		}
-		if i%3 == 0 && i%5 == 0 {
-			fmt.Println("FizzBuzz")
-		} else if i%5 == 0 {
-			fmt.Println("Buzz")
-		} else if i%3 == 0 {
-			fmt.Println("Fizz")
-		} else {
-			fmt.Println(i)
-		}
-	}
-
-}
-
-func fizz_buzz_s(val int) {
+func fizzBuzz(val int) {
 	for i := 1; i <= val; i++ {
 		switch {
 		case i%3 == 0 && i%5 == 0:
@@ -132,31 +114,27 @@ func fizz_buzz_s(val int) {
 	}
 }
 
-func classic_array(inputArray []int) {
-	var totalUser int = 0
-	for _, value := range inputArray {
-		totalUser += value
+func fizzBuzzSwitch(val int) {
+	for i := 1; i <= val; i++ {
+		switch {
+		case i%3 == 0 && i%5 == 0:
+			fmt.Println("FizzBuzz")
+		case i%3 == 0:
+			fmt.Println("Fizz")
+		case i%5 == 0:
+			fmt.Println("Buzz")
+		default:
+			fmt.Println(i)
+		}
 	}
-	fmt.Println("Total Array elements: ", totalUser)
-	fmt.Println("Mean/Average: ", totalUser/len(inputArray))
 }
 
-func make_slice() {
+func makeSlice() {
 	slice := append(make([]int, 19), 99, 88, 12, 78)
 	fmt.Println(slice)
 }
 
-func copy_func() {
-	slice := []int{9, 56, 88, 78, 33}
-	slice_two := []int{9, 56, 88, 78, 33}
-	copy(slice, slice_two)
-}
-
-func go_map() {
-	new_map := make(map[int]string)
-	new_map[8] = "Seventy Eight"
-	fmt.Println(new_map)
-
+func goMap() {
 	elements := map[string]string{
 		"H":  "Hydrogen",
 		"He": "Helium",
@@ -167,101 +145,89 @@ func go_map() {
 		"N":  "Nitrogen",
 		"O":  "Oxygen",
 		"F":  "Fluorine",
-		"Ne": "Neon"}
-
+		"Ne": "Neon",
+	}
 	if chemical, ok := elements["Uriah"]; ok {
 		fmt.Println(ok, chemical)
 	}
 }
 
-func small_number(inputArray []int) int {
-	small_val := inputArray[0]
-	for _, value := range inputArray {
-		if value < small_val {
-			small_val = value
+func findSmallest(arr []int) int {
+	smallest := arr[0]
+	for _, v := range arr {
+		if v < smallest {
+			smallest = v
 		}
 	}
-	return small_val
+	return smallest
 }
 
-func largest_number(inputArray []int) int {
-	large_val := inputArray[0]
-	for i := 0; i < len(inputArray); i++ {
-		if inputArray[i] > large_val {
-			large_val = inputArray[i]
+func findLargest(arr []int) int {
+	largest := arr[0]
+	for _, v := range arr {
+		if v > largest {
+			largest = v
 		}
 	}
-	return large_val
+	return largest
 }
 
-func arraySmLg(xs []float64) (float64, float64) {
-	sm_number := xs[0]
-	lg_number := xs[len(xs)-1]
+func findSmallestLargest(xs []float64) (float64, float64) {
+	smallest, largest := xs[0], xs[0]
 	for _, v := range xs {
-		if v < sm_number {
-			sm_number = v
-		} else if v > lg_number {
-			lg_number = v
+		if v < smallest {
+			smallest = v
+		}
+		if v > largest {
+			largest = v
 		}
 	}
-	return sm_number, lg_number
+	return smallest, largest
 }
 
 func sumWithMinMaxProduct(args ...int) (int, int) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered from:", r)
+		}
+	}()
 	for _, v := range args {
 		if v < 0 {
-			defer func() {
-				str := recover()
-				fmt.Println(str)
-			}()
 			panic("ERROR: Signed Negative Integer. Number should be a signed Positive")
 		}
 	}
-	least, most := args[0], args[len(args)-1]
-	var multiply int
+	least, most := args[0], args[0]
 	for _, v := range args {
 		if v < least {
 			least = v
-		} else if v > most {
+		}
+		if v > most {
 			most = v
 		}
-		multiply = least * most
 	}
 	total := 0
 	for _, v := range args {
 		total += v
 	}
-	return total, multiply
+	return total, least * most
 }
 
 func generateEvenNumber() func() uint {
 	i := uint(0)
-	return func() (ret uint) {
-		ret = i
+	return func() uint {
+		ret := i
 		i += 2
-		return
+		return ret
 	}
 }
 
-func facotrial(fact uint) uint {
-	if fact == 0 {
+func factorial(n uint) uint {
+	if n == 0 {
 		return 1
 	}
-	return fact * facotrial(fact-1)
+	return n * factorial(n-1)
 }
 
-func givenNumber(xPtr *int) {
+func assignNumber(xPtr *int) {
 	*xPtr = 4
 }
-
-type Shape interface {
-	area() float64
-}
-
-type GivenPlayers struct {
-	player_name, city, state string
-	age int
-}
-
-var explicit int
-
