@@ -5,11 +5,7 @@ import (
 	"math"
 )
 
-func main() {
-	investment := 1000.0
-	rate := 0.05
-	years := 5.0
-
+func CalculateInvestmentFutureValues(investment, rate, years float64) (float64, float64) {
 	future := investment * math.Pow(1+rate, years)
 
 	// Calculate future real value with 1% rate increase per year
@@ -22,4 +18,6 @@ func main() {
 
 	fmt.Println("Future value of investment:", future)
 	fmt.Println("Future real value (with 1% annual rate increase):", futureRealValue)
+
+	return future, futureRealValue
 }
