@@ -18,7 +18,7 @@ func main() {
 	var c CircleDef
 	circumference := new(CircleDef)
 	// circle := CircleDef{x: 90, y: 23, z: 12}
-	circumf := CircleDef{x:2, y:8, z:18}
+	circumf := CircleDef{x: 2, y: 8, z: 18}
 	fmt.Printf("c: %v\n", c)
 	fmt.Printf("circumf: %v\n", circumf)
 	fmt.Printf("circumference: %v\n", circumference)
@@ -102,10 +102,10 @@ type CircleDef struct {
 	z float64
 }
 
-func person_def(diameter float64, circumference float64, radius float64) CircleDef {
-	person_def := CircleDef{x: diameter, y: circumference, z: radius}
-	fmt.Println(person_def.x)
-	return person_def
+func personDef(diameter float64, circumference float64, radius float64) CircleDef {
+	personDef := CircleDef{x: diameter, y: circumference, z: radius}
+	fmt.Println(personDef.x)
+	return personDef
 }
 
 func circleArea(param CircleDef) float64 {
@@ -113,11 +113,11 @@ func circleArea(param CircleDef) float64 {
 }
 
 func ptrsCircleArea(circle *CircleDef) float64 {
-	return math.Pi * circle.x*circle.x
+	return math.Pi * circle.x * circle.x
 }
 
 func (c *CircleDef) area() float64 {
-	return math.Pi * c.x*c.x
+	return math.Pi * c.x * c.x
 }
 
 type Rectangle struct {
